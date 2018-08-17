@@ -18,6 +18,9 @@ class editViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
     
     @IBOutlet var editContent: UITextView!
     
+    
+    @IBOutlet var saveButtonOut: UIBarButtonItem!
+    
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "saveBackTVC", sender: self)
     }
@@ -59,6 +62,12 @@ class editViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
         editContent.font = UIFont(name: "Helvetica-Light", size: 25)
         editContent.textColor = .white
         editContent.autocapitalizationType = .sentences
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(editViewController.textChange(_:)), name: .UITextFieldTextDidChange, object: nil)
+    }
+    
+    @objc func textChange(_ notification: Notification) {
+        self.saveButtonOut.isEnabled = (editTitle.text?.characters.count)!>0
     }
 
     override func didReceiveMemoryWarning() {

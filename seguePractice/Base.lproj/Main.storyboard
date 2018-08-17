@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,7 +28,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8f7-Z3-cXw">
-                                            <rect key="frame" x="10" y="0.0" width="365" height="43.5"/>
+                                            <rect key="frame" x="20" y="0.0" width="355" height="43.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -36,11 +37,12 @@
                                     <color key="backgroundColor" red="0.34901960780000002" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="8f7-Z3-cXw" firstAttribute="top" secondItem="s97-gB-Is8" secondAttribute="top" id="BCd-zW-wpK"/>
-                                        <constraint firstItem="8f7-Z3-cXw" firstAttribute="leading" secondItem="s97-gB-Is8" secondAttribute="leading" constant="10" id="If6-eX-PYW"/>
+                                        <constraint firstItem="8f7-Z3-cXw" firstAttribute="leading" secondItem="s97-gB-Is8" secondAttribute="leading" constant="20" id="If6-eX-PYW"/>
                                         <constraint firstAttribute="bottom" secondItem="8f7-Z3-cXw" secondAttribute="bottom" id="IpU-wb-7ft"/>
                                         <constraint firstAttribute="trailing" secondItem="8f7-Z3-cXw" secondAttribute="trailing" id="Yuz-Pa-Gfe"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.34901960780000002" green="0.34901960780000002" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="titleLabel" destination="8f7-Z3-cXw" id="2XF-li-5NH"/>
                                     <segue destination="kZp-XD-11c" kind="show" identifier="editSegue" id="e5f-1p-rx8"/>
@@ -54,13 +56,22 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="To Do List" id="prm-VY-0Ul">
                         <barButtonItem key="backBarButtonItem" title=" " id="sjy-kI-qeG"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="weJ-88-E33">
-                            <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" identifier="addSegue" id="4pS-pu-x8e"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="weJ-88-E33">
+                                <connections>
+                                    <action selector="addButton:" destination="twx-3M-B0c" id="mNR-Wx-fyE"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="addSegue" id="4pS-pu-x8e"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" id="Jz3-y6-kMD">
+                                <connections>
+                                    <action selector="edit:" destination="twx-3M-B0c" id="N0b-45-T1h"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="Jz3-y6-kMD" id="yTt-Nv-QaL"/>
                         <outlet property="emptyView" destination="AIz-vv-G0K" id="3Uo-qc-3Zs"/>
                     </connections>
                 </tableViewController>
@@ -134,6 +145,7 @@
                     <connections>
                         <outlet property="editContent" destination="TcF-c4-bVh" id="tIX-KI-RXd"/>
                         <outlet property="editTitle" destination="QnT-5H-TGT" id="ZZm-pS-yd7"/>
+                        <outlet property="saveButtonOut" destination="iNr-AX-0qh" id="um0-7a-wHy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v3Z-YV-cXy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -209,6 +221,7 @@
                     <connections>
                         <outlet property="addContent" destination="vSV-lu-4AQ" id="U27-P0-386"/>
                         <outlet property="addTitle" destination="6Ue-bd-hYB" id="u0J-a8-9y1"/>
+                        <outlet property="saveButton" destination="DGq-DB-x01" id="0MO-wT-fhD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

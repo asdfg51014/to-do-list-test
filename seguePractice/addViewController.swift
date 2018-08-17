@@ -12,9 +12,13 @@ class addViewController: UIViewController, UITextFieldDelegate, UITextViewDelega
 
     var information: Information = Information()
     
+    var segueBool = false
+    
     @IBOutlet var addTitle: UITextField!
     
     @IBOutlet var addContent: UITextView!
+    
+    @IBOutlet var saveButton: UIBarButtonItem!
     
     
     
@@ -39,6 +43,9 @@ class addViewController: UIViewController, UITextFieldDelegate, UITextViewDelega
         return false
     }
     
+//    func judgment() {
+//        (addTitle.text == nil) ? (saveButton.isEnabled = true) : (saveButton.isEnabled = false)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,16 +64,34 @@ class addViewController: UIViewController, UITextFieldDelegate, UITextViewDelega
         addContent.font = UIFont(name: "Helvetica-Light", size: 25)
         addContent.textColor = .white
         addContent.autocapitalizationType = .sentences
-        
 
-        // Do any additional setup after loading the view.
+        //saveButton is enabled set
+        saveButton.isEnabled = false
+        NotificationCenter.default.addObserver(self, selector: #selector(addViewController.textChange(_:)), name: .UITextFieldTextDidChange, object: nil)
+    }
+    //saveButton is enabled set of obje
+    @objc func textChange(_ notification: Notification) {
+        self.saveButton.isEnabled = (addTitle.text?.characters.count)! > 0
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
+    
+    
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        let currentText = addTitle.text ?? ""
+//        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+//        saveButton.isEnabled = newText.characters.count > 0
+//        return true
+//    }
 
 
 }
